@@ -1,0 +1,502 @@
+:root {
+    --color-deep-blue: #112540;
+    --color-medium-blue: #3A5880;
+    --color-accent-pink: #F59BA3;
+    --color-light-pink: #FCD8DC;
+    --color-gray: #ABABAB;
+    --color-white: #FFFFFF;
+    --color-off-white: #f4f4f4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--color-off-white);
+    color: var(--color-deep-blue);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- CABEÇALHO --- */
+header {
+    background-color: var(--color-deep-blue);
+    color: var(--color-white);
+    padding: 20px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* LOGO CLICÁVEL */
+.logo-placeholder {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-accent-pink);
+    border: 2px dashed var(--color-gray);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.logo-placeholder:hover {
+    transform: scale(1.02);
+    border-color: var(--color-white);
+}
+
+.search-bar {
+    display: flex;
+    flex-grow: 1;
+    max-width: 500px;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.search-bar button {
+    background-color: var(--color-medium-blue);
+    color: var(--color-white);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: var(--color-accent-pink);
+}
+
+/* --- FILTROS (CUSTOMIZADOS) --- */
+.filters-section {
+    background-color: var(--color-light-pink);
+    padding: 25px 0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    margin-bottom: 50px;
+}
+
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10; /* Garante que os filtros fiquem sobre o conteúdo */
+}
+
+/* O Container Principal do Dropdown */
+.custom-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--color-deep-blue);
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdown-label i {
+    color: var(--color-medium-blue);
+}
+
+/* O "Botão" que mostra o valor selecionado */
+.dropdown-select {
+    background-color: var(--color-white);
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 160px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+/* Efeito ao passar o mouse no botão */
+.dropdown-select:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-color: rgba(245, 155, 163, 0.5);
+}
+
+.arrow {
+    transition: transform 0.3s;
+    font-size: 0.8rem;
+    color: var(--color-medium-blue);
+}
+
+/* A Lista de Opções (Escondida inicialmente) */
+.dropdown-list {
+    position: absolute;
+    top: calc(100% + 10px); 
+    left: 0;
+    width: 100%; 
+    min-width: 180px;
+    background-color: var(--color-white);
+    border-radius: 15px; 
+    padding: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 100;
+}
+
+/* Quando o dropdown ta ativo */
+.custom-dropdown.active .dropdown-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-dropdown.active .arrow {
+    transform: rotate(180deg); /* Gira a setinha */
+}
+
+/* Itens individuais da lista */
+.dropdown-list li {
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: all 0.2s;
+    color: var(--color-deep-blue);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+/* Efeito HOVER ROSA nas opções */
+.dropdown-list li:hover {
+    background-color: var(--color-light-pink);
+    color: var(--color-deep-blue);
+    padding-left: 20px; /* Pequeno movimento para a direita */
+}
+
+/* --- GRADE DE PRODUTOS --- */
+main {
+    padding: 40px 0 120px 0;
+    min-height: 60vh;
+    position: relative;
+    z-index: 1;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    border-color: var(--color-light-pink);
+}
+
+.product-image-container {
+    height: 250px;
+    overflow: hidden;
+    background-color: var(--color-off-white);
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.product-card:hover .product-image-container img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-category {
+    font-size: 0.85rem;
+    color: var(--color-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.product-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--color-deep-blue);
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-accent-pink);
+}
+
+.product-stock {
+    font-size: 0.9rem;
+    color: var(--color-medium-blue);
+}
+
+.out-of-stock {
+    color: var(--color-accent-pink);
+    font-weight: bold;
+}
+
+/* --- RODAPÉ --- */
+footer {
+    background-color: var(--color-deep-blue);
+    color: var(--color-gray);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+/* --- MODAL E CARROSSEL --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(17, 37, 64, 0.9);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-modal {
+    color: var(--color-gray);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.close-modal:hover {
+    color: var(--color-accent-pink);
+}
+
+.modal-body {
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.modal-image-area {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.carousel-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(17, 37, 64, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(245, 155, 163, 0.9);
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+.carousel-indicators {
+    margin-top: 10px;
+    color: var(--color-gray);
+    font-size: 0.9rem;
+}
+
+.modal-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-subtitle {
+    color: var(--color-gray);
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+#modalDescription {
+    line-height: 1.6;
+    color: var(--color-deep-blue);
+    margin-bottom: 20px;
+}
+
+.modal-meta {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--color-medium-blue);
+}
+
+.modal-price-area {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-accent-pink);
+    margin-bottom: 25px;
+}
+
+.whatsapp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #25D366;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.whatsapp-button:hover {
+    background-color: #1da851;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header-content { flex-direction: column; }
+    .logo-placeholder { text-align: center; }
+    
+    .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .custom-dropdown {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .dropdown-select {
+        width: 100%;
+    }
+
+    .dropdown-list {
+        position: relative;
+        top: 0;
+        box-shadow: none;
+        border: 1px solid #eee;
+        display: none; 
+        opacity: 1; visibility: visible; transform: none;
+    }
+
+    .custom-dropdown.active .dropdown-list {
+        display: block; 
+    }
+
+    .modal-body { flex-direction: column; }
+    .carousel-container { height: 300px; }
+
+
+    footer {
+        margin-top: 150px !important; /* O !important obriga o navegador a aceitar */
+        padding-bottom: 30px;
+    }
+}
