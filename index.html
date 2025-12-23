@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumi Joias - Loja Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo-placeholder" id="logoHome" title="Voltar ao início">
+                <span>Lumi Joias</span>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar joias...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="filters-section">
+        <div class="container filters-container">
+            
+            <div class="custom-dropdown" id="dropdownType">
+                <div class="dropdown-label"><i class="fas fa-gem"></i> Tipo:</div>
+                <div class="dropdown-select">
+                    <span class="selected-value">Todos</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="dropdown-list">
+                    <li data-value="todos">Todos</li>
+                    <li data-value="colar">Colares</li>
+                    <li data-value="anel">Anéis</li>
+                    <li data-value="pulseira">Pulseiras</li>
+                    <li data-value="brinco">Brincos</li>
+                    <li data-value="pingente">Pingentes</li>
+                </ul>
+            </div>
+
+            <div class="custom-dropdown" id="dropdownGender">
+                <div class="dropdown-label"><i class="fas fa-venus-mars"></i> Gênero:</div>
+                <div class="dropdown-select">
+                    <span class="selected-value">Todos</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="dropdown-list">
+                    <li data-value="todos">Todos</li>
+                    <li data-value="feminino">Feminino</li>
+                    <li data-value="masculino">Masculino</li>
+                    <li data-value="unissex">Unissex</li>
+                </ul>
+            </div>
+
+            <div class="custom-dropdown" id="dropdownPrice">
+                <div class="dropdown-label"><i class="fas fa-sort-amount-down"></i> Preço:</div>
+                <div class="dropdown-select">
+                    <span class="selected-value">Padrão</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="dropdown-list">
+                    <li data-value="default">Padrão</li>
+                    <li data-value="asc">Menor preço para maior</li>
+                    <li data-value="desc">Maior preço para menor</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <main class="container">
+        <div id="product-grid" class="product-grid">
+            <p>Carregando produtos...</p>
+        </div>
+        <div id="no-results" style="display: none; text-align: center; padding: 20px;">
+            Nenhum produto encontrado com esses filtros.
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Lumi joias. Todos os direitos reservados.</p>
+            <p>Site feito e moderado por Jamerson D.A. Queiroz</p>
+            <p>Líder da empresa: Fernanda S.G. Silva</p>
+        </div>
+    </footer>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            
+            <div class="modal-body">
+                <div class="modal-image-area">
+                    <div class="carousel-container">
+                        <button class="carousel-btn prev-btn" id="prevImgBtn"><i class="fas fa-chevron-left"></i></button>
+                        <img id="modalImg" src="" alt="Imagem do produto">
+                        <button class="carousel-btn next-btn" id="nextImgBtn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="carousel-indicators" id="imageCounter">1 / 1</div>
+                </div>
+
+                <div class="modal-details">
+                    <h2 id="modalTitle">Nome do Produto</h2>
+                    <p id="modalCategory" class="modal-subtitle">Categoria | Gênero</p>
+                    <p id="modalDescription">Descrição detalhada da joia.</p>
+                    
+                    <div class="modal-meta">
+                        <span class="modal-stock" id="modalStock">Estoque: 10</span>
+                    </div>
+
+                    <div class="modal-price-area">
+                        <span id="modalPrice">R$ 0,00</span>
+                    </div>
+
+                    <a href="#" id="whatsappBtn" target="_blank" class="whatsapp-button">
+                        <i class="fab fa-whatsapp"></i> Comprar pelo WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
