@@ -272,7 +272,6 @@ window.addEventListener('click', (e) => { if (e.target === modal) modal.style.di
 searchBtn.addEventListener('click', applyFilters);
 searchInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') applyFilters(); });
 
-// Início
 renderProducts(productList);
 
 /* * ==========================================

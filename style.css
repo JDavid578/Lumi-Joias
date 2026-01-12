@@ -69,35 +69,62 @@ header {
     /* Efeito de zoom suave ao passar o mouse */
 }
 
+/* --- BARRA DE PESQUISA (Redonda e Rosa) --- */
 .search-bar {
     display: flex;
     flex-grow: 1;
     max-width: 500px;
+    
+    /* O Design Novo */
+    background-color: var(--color-light-pink); /* Fundo rosa */
+    border-radius: 50px;
+    padding: 5px 5px 5px 20px;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.search-bar:focus-within {
+    box-shadow: 0 0 15px rgba(245, 155, 163, 0.6);
+    background-color: #ffeeee; /* Fundo rosa claro ao focar */
+    border-color: var(--color-white);
 }
 
 .search-bar input {
     flex-grow: 1;
-    padding: 10px;
+    background-color: transparent;
     border: none;
-    border-radius: 5px 0 0 5px;
     outline: none;
+    color: var(--color-deep-blue); /* Texto azul escuro */
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Cor do texto de exemplo "Buscar joias..." */
+.search-bar input::placeholder {
+    color: var(--color-medium-blue);
+    opacity: 0.7;
 }
 
 .search-bar button {
-    background-color: var(--color-medium-blue);
-    color: var(--color-white);
+    background-color: transparent;
+    color: var(--color-deep-blue);
     border: none;
     padding: 10px 15px;
-    border-radius: 0 5px 5px 0;
+    border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-bar button:hover {
-    background-color: var(--color-accent-pink);
+    color: var(--color-accent-pink);
+    background-color: transparent;
+    transform: scale(1.1); 
 }
-
-/* --- FILTROS (CUSTOMIZADOS) --- */
+/* --- SEÇÃO DE FILTROS COM DROPDOWNS --- */
 .filters-section {
     background-color: var(--color-light-pink);
     padding: 25px 0;
@@ -113,7 +140,6 @@ header {
     justify-content: center;
     position: relative;
     z-index: 10;
-    /* Garante que os filtros fiquem sobre o conteúdo */
 }
 
 /* O Container Principal do Dropdown */
@@ -146,7 +172,6 @@ header {
     transition: all 0.3s;
 }
 
-/* Efeito ao passar o mouse no botão */
 .dropdown-select:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-color: rgba(245, 155, 163, 0.5);
@@ -489,16 +514,13 @@ footer {
     flex-grow: 1;
     max-width: 500px;
     gap: 10px;
-    /* Espaço entre o botão de menu e a pesquisa */
     align-items: center;
 }
 
 .mobile-filter-btn {
     display: none;
-    /* Escondido por padrão no PC */
     background-color: transparent;
     border: 2px solid var(--color-gray);
-    /* Borda suave */
     color: var(--color-white);
     padding: 10px 15px;
     border-radius: 5px;
@@ -513,7 +535,7 @@ footer {
     color: var(--color-accent-pink);
 }
 
-/* Responsividade */
+/* Responsividade para mobile*/
 @media (max-width: 768px) {
     .header-content { flex-direction: column; }
     .logo-placeholder { text-align: center; }
@@ -532,7 +554,7 @@ footer {
 
     .search-bar {
         max-width: 100%;
-        margin-bottom: 0; /* Removemos a margem aqui pois o wrapper cuida disso */
+        margin-bottom: 0;
     }
 
     /* --- LÓGICA DE ESCONDER/MOSTRAR FILTROS --- */
@@ -540,11 +562,10 @@ footer {
         /* Estado inicial: Escondido */
         max-height: 0;
         opacity: 0;
-        overflow: hidden; /* Impede que o conteúdo vaze quando fechado */
-        padding: 0; /* Remove o enchimento para sumir totalmente */
-        margin-bottom: 20px; /* Margem padrão */
+        overflow: hidden; 
+        padding: 0; 
+        margin-bottom: 20px;
         
-        /* Animação suave */
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
