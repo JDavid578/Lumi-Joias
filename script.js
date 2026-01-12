@@ -1,11 +1,10 @@
 /*
  * ===================================================================================================
- * BANCO DE DADOS DE PRODUTOS AQUI EMBAIXO, É SO COPIAR ALGUM TEMPLATE E COLOCAR OS DADOS DOS PRODUTOS         
+ * BANCO DE DADOS DE PRODUTOS
  * ===================================================================================================
  */
 
 const productList = [
-
     {
         id: 1,
         name: "Anel Solitário Safira",
@@ -42,7 +41,7 @@ const productList = [
         ],
         category: "anel",
         gender: "masculino",
-        description: "um lindo anel dourado de ouro muito bonito e cravejado com pedras brilhantes."
+        description: "Um lindo anel dourado de ouro muito bonito e cravejado com pedras brilhantes."
     },
     {
         id: 4,
@@ -56,39 +55,38 @@ const productList = [
         gender: "feminino",
         description: "Par de brincos clássicos com pérolas de água doce e fecho de ouro branco."
     }
-    // Adiciona os produtos em sequencia de id aq embaixo...
+    // Adicione mais produtos aqui...
 ];
 
 /**
  * ==========================================
- * LÓGICA DO SITE (precisa mexer em nd aq nn)
+ * LÓGICA DO SITE
  * ==========================================
  */
 
+// Elementos Gerais
 const productGrid = document.getElementById('product-grid');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const noResultsMsg = document.getElementById('no-results');
 const logoHome = document.getElementById('logoHome');
 
-// Estado atual dos filtros (para lembrar oq foi selecionado)
+// Estado atual dos filtros
 let currentFilters = {
     type: 'todos',
     gender: 'todos',
     sort: 'default'
 };
 
-// --- CONFIGURAÇÃO DOS DROPDOWNS CUSTOMIZADOS ---
+// --- FILTROS CUSTOMIZADOS (DROPDOWNS) ---
 function setupCustomDropdown(id, filterKey) {
     const dropdown = document.getElementById(id);
     const selectBtn = dropdown.querySelector('.dropdown-select');
     const selectedValueSpan = dropdown.querySelector('.selected-value');
     const options = dropdown.querySelectorAll('.dropdown-list li');
 
-    //Abrir/Fechar ao clicar no botão
     selectBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Evita q o clique feche imediatamente
-        // Fecha outros dropdowns q possam estar abertos
+        e.stopPropagation();
         document.querySelectorAll('.custom-dropdown').forEach(d => {
             if (d !== dropdown) d.classList.remove('active');
         });
@@ -98,36 +96,30 @@ function setupCustomDropdown(id, filterKey) {
     options.forEach(option => {
         option.addEventListener('click', (e) => {
             e.stopPropagation();
-            // Atualiza o texto visualmente
             selectedValueSpan.textContent = option.textContent;
-            dropdown.classList.remove('active'); // Fecha a lista
-
-            // Atualiza a lógica do filtro
+            dropdown.classList.remove('active');
             currentFilters[filterKey] = option.getAttribute('data-value');
-            applyFilters(); // Aplica os filtros novamente
+            applyFilters();
         });
     });
 }
 
-// Inicializa os 3 filtros customizados
 setupCustomDropdown('dropdownType', 'type');
 setupCustomDropdown('dropdownGender', 'gender');
 setupCustomDropdown('dropdownPrice', 'sort');
 
-// Fecha qualquer dropdown se clicar fora deles na página
 window.addEventListener('click', () => {
     document.querySelectorAll('.custom-dropdown').forEach(d => {
         d.classList.remove('active');
     });
 });
 
-
-// ---FUNÇÕES GERAIS---
+// --- FUNÇÕES UTILITÁRIAS ---
 function formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 }
 
-// ---RENDERIZAÇÃO NA GRADE---
+// --- RENDERIZAÇÃO ---
 function renderProducts(productsToRender) {
     productGrid.innerHTML = '';
     
@@ -167,12 +159,11 @@ function renderProducts(productsToRender) {
     });
 }
 
-// APLICAR FILTROS
+// --- FILTROS ---
 function applyFilters() {
     const searchTerm = searchInput.value.toLowerCase();
     
     let filteredProducts = productList.filter(product => {
-        // Usa os valores guardados em currentFilters
         const matchType = currentFilters.type === 'todos' || product.category === currentFilters.type;
         const matchGender = currentFilters.gender === 'todos' || product.gender === currentFilters.gender;
         const matchSearch = product.name.toLowerCase().includes(searchTerm);
@@ -180,7 +171,6 @@ function applyFilters() {
         return matchType && matchGender && matchSearch;
     });
 
-    // Ordenação
     if (currentFilters.sort === 'asc') {
         filteredProducts.sort((a, b) => a.price - b.price);
     } else if (currentFilters.sort === 'desc') {
@@ -190,20 +180,15 @@ function applyFilters() {
     renderProducts(filteredProducts);
 }
 
-// --- LOGO: RESETAR TUDO ---
+// --- LOGO RESET ---
 logoHome.addEventListener('click', resetHome);
 
 function resetHome() {
     searchInput.value = '';
-    
-    // Reseta as variáveis de filtro para o padrão
     currentFilters = { type: 'todos', gender: 'todos', sort: 'default' };
-    
-    // Reseta o texto visual dos dropdowns
     document.querySelector('#dropdownType .selected-value').textContent = 'Todos';
     document.querySelector('#dropdownGender .selected-value').textContent = 'Todos';
     document.querySelector('#dropdownPrice .selected-value').textContent = 'Padrão';
-
     renderProducts(productList);
 }
 
@@ -217,12 +202,14 @@ const modalDescription = document.getElementById('modalDescription');
 const modalStock = document.getElementById('modalStock');
 const modalPrice = document.getElementById('modalPrice');
 const whatsappBtn = document.getElementById('whatsappBtn');
+const addToCartBtn = document.getElementById('addToCartBtn'); // Botão do carrinho
 const prevImgBtn = document.getElementById('prevImgBtn');
 const nextImgBtn = document.getElementById('nextImgBtn');
 const imageCounter = document.getElementById('imageCounter');
 
 let currentModalImages = [];
 let currentImageIndex = 0;
+let currentProductInModal = null; // Variável para saber qual produto está aberto
 
 function updateCarouselImage() {
     if (currentModalImages.length > 0) {
@@ -239,7 +226,10 @@ function updateCarouselImage() {
     }
 }
 
+// --- FUNÇÃO ÚNICA PARA ABRIR MODAL ---
 function openModal(product) {
+    currentProductInModal = product; // Salva o produto atual para usar no carrinho
+    
     currentModalImages = product.images;
     currentImageIndex = 0;
     updateCarouselImage();
@@ -249,33 +239,38 @@ function openModal(product) {
     modalDescription.textContent = product.description;
     modalPrice.textContent = formatCurrency(product.price);
 
+    // Lógica de estoque: Mostra/Esconde botões
     if(product.stock > 0) {
         modalStock.textContent = `Disponível em estoque: ${product.stock} unidades`;
         modalStock.style.color = 'var(--color-medium-blue)';
+        
         whatsappBtn.style.display = 'inline-flex';
+        addToCartBtn.style.display = 'inline-flex'; 
+        
         const phoneNumber = '558195228077'; 
-        const message = `Olá! Tenho interesse em: ${product.name}`;
+        const message = `Olá! Tenho interesse em: \n\n${product.name}\n\nvalor: ${formatCurrency(product.price)}.`;
         whatsappBtn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     } else {
         modalStock.innerHTML = '<span class="out-of-stock">Produto Esgotado</span>';
         whatsappBtn.style.display = 'none';
+        addToCartBtn.style.display = 'none';
     }
     modal.style.display = 'flex';
 }
 
+// Listeners do Modal
 nextImgBtn.addEventListener('click', (e) => { e.stopPropagation(); currentImageIndex = (currentImageIndex + 1) % currentModalImages.length; updateCarouselImage(); });
 prevImgBtn.addEventListener('click', (e) => { e.stopPropagation(); currentImageIndex = (currentImageIndex - 1 + currentModalImages.length) % currentModalImages.length; updateCarouselImage(); });
-
 closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
 window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
 
+// Listeners de Pesquisa
 searchBtn.addEventListener('click', applyFilters);
 searchInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') applyFilters(); });
 
-renderProducts(productList);
 
 /* * ==========================================
- * CONTROLE DO MENU DE FILTROS MOBILE
+ * MENU MOBILE
  * ==========================================
  */
 const mobileFilterBtn = document.getElementById('mobileFilterBtn');
@@ -283,13 +278,8 @@ const filtersSection = document.querySelector('.filters-section');
 
 if(mobileFilterBtn) {
     mobileFilterBtn.addEventListener('click', () => {
-        // Alterna a classe que mostra/esconde a seção rosa
         filtersSection.classList.toggle('show-filters');
-        
-        // Alterna o visual do botão (opcional, para deixá-lo rosa quando ativo)
         mobileFilterBtn.classList.toggle('active');
-
-        // Troca o ícone: se estiver aberto vira um X, se fechado vira barras
         const icon = mobileFilterBtn.querySelector('i');
         if (filtersSection.classList.contains('show-filters')) {
             icon.classList.remove('fa-bars');
@@ -300,3 +290,108 @@ if(mobileFilterBtn) {
         }
     });
 }
+
+/*
+ * ==========================================
+ * CARRINHO DE COMPRAS
+ * ==========================================
+ */
+
+let cart = []; // Lista de produtos
+
+// Elementos do Carrinho
+const floatingCartBtn = document.getElementById('floatingCartBtn');
+const cartModal = document.getElementById('cartModal');
+const closeCartModalBtn = document.getElementById('closeCartModal');
+const cartItemsContainer = document.getElementById('cartItemsContainer');
+const cartCountSpan = document.getElementById('cartCount');
+const cartTotalValue = document.getElementById('cartTotalValue');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const clearCartBtn = document.getElementById('clearCartBtn');
+
+// Adicionar ao Carrinho
+addToCartBtn.addEventListener('click', () => {
+    if (currentProductInModal) {
+        cart.push(currentProductInModal);
+        updateCartUI();
+        modal.style.display = 'none'; // Fecha o modal do produto e volta pra loja
+    }
+});
+
+// Atualizar Interface do Carrinho
+function updateCartUI() {
+    cartCountSpan.textContent = cart.length;
+    cartItemsContainer.innerHTML = '';
+    
+    let total = 0;
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Seu carrinho está vazio.</p>';
+    } else {
+        cart.forEach((item, index) => {
+            total += item.price;
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('cart-item');
+            const thumb = item.images && item.images.length > 0 ? item.images[0] : '';
+
+            itemDiv.innerHTML = `
+                <img src="${thumb}" alt="${item.name}">
+                <div class="cart-item-details">
+                    <span class="cart-item-title">${item.name}</span>
+                    <span class="cart-item-price">${formatCurrency(item.price)}</span>
+                </div>
+                <button class="remove-item-btn" onclick="removeFromCart(${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            cartItemsContainer.appendChild(itemDiv);
+        });
+    }
+    cartTotalValue.textContent = formatCurrency(total);
+}
+
+// Remover Item
+window.removeFromCart = function(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
+
+// Abrir/Fechar Carrinho
+floatingCartBtn.addEventListener('click', () => {
+    updateCartUI();
+    cartModal.style.display = 'flex';
+});
+
+closeCartModalBtn.addEventListener('click', () => {
+    cartModal.style.display = 'none';
+});
+
+clearCartBtn.addEventListener('click', () => {
+    cart = [];
+    updateCartUI();
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === cartModal) cartModal.style.display = 'none';
+});
+
+// Finalizar Compra (WhatsApp)
+checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) return;
+
+    const phoneNumber = '558195228077'; 
+    let message = "Olá, tenho interesse nesses produtos:\n\n";
+    let total = 0;
+
+    cart.forEach(item => {
+        message += `• ${item.name} ; ${formatCurrency(item.price)}\n`;
+        total += item.price;
+    });
+
+    message += `\nTotal: ${formatCurrency(total)}`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+});
+
+// Inicialização
+renderProducts(productList);

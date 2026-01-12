@@ -535,6 +535,168 @@ footer {
     color: var(--color-accent-pink);
 }
 
+/* --- ESTILOS DO CARRINHO --- */
+
+/* 1. Botão Adicionar ao Carrinho (No Modal do Produto) */
+.add-to-cart-btn {
+    background-color: var(--color-deep-blue);
+    color: var(--color-white);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px; /* Espaço entre ele e o botão do WhatsApp */
+    width: 100%; /* Ocupa a largura toda */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: var(--color-medium-blue);
+}
+
+/* 2. Botão Flutuante (Canto Direito Inferior) */
+.floating-cart {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    background-color: var(--color-accent-pink);
+    color: var(--color-deep-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 2000; /* Fica acima de tudo */
+    transition: transform 0.3s;
+}
+
+.floating-cart:hover {
+    transform: scale(1.1);
+}
+
+/* Bolinha com número de itens */
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--color-deep-blue);
+    color: var(--color-white);
+    font-size: 0.8rem;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid var(--color-white);
+}
+
+/* 3. Modal do Carrinho (Ajustes Específicos) */
+.cart-content {
+    max-width: 500px; /* Mais estreito que o modal de produto */
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh; /* Altura máxima para caber na tela */
+}
+
+.cart-header {
+    border-bottom: 2px solid var(--color-off-white);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    color: var(--color-deep-blue);
+}
+
+/* Lista de Itens com Scroll */
+.cart-items-container {
+    flex-grow: 1;
+    overflow-y: auto; /* Permite rolar se tiver muitos itens */
+    margin-bottom: 20px;
+    padding-right: 5px; /* Espaço para a barra de rolagem */
+}
+
+/* Item Individual do Carrinho */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--color-off-white);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--color-deep-blue);
+    display: block;
+}
+
+.cart-item-price {
+    font-size: 0.9rem;
+    color: var(--color-medium-blue);
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: var(--color-accent-pink);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px;
+}
+
+/* Rodapé do Carrinho */
+.cart-footer {
+    border-top: 2px solid var(--color-off-white);
+    padding-top: 15px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-deep-blue);
+    margin-bottom: 15px;
+}
+
+.clear-cart-btn {
+    background: none;
+    border: none;
+    color: var(--color-gray);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
 /* Responsividade para mobile*/
 @media (max-width: 768px) {
     .header-content { flex-direction: column; }

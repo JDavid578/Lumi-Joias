@@ -125,7 +125,43 @@
                     <a href="#" id="whatsappBtn" target="_blank" class="whatsapp-button">
                         <i class="fab fa-whatsapp"></i> Comprar pelo WhatsApp
                     </a>
+
+                    <button id="addToCartBtn" class="add-to-cart-btn">
+                        <i class="fas fa-cart-plus"></i> Adicionar ao Carrinho
+                    </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="floatingCartBtn" class="floating-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount" class="cart-count">0</span>
+    </div>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content cart-content">
+            <span class="close-modal" id="closeCartModal">&times;</span>
+
+            <div class="cart-header">
+                <h2><i class="fas fa-shopping-bag"></i> Seu Carrinho</h2>
+            </div>
+
+            <div id="cartItemsContainer" class="cart-items-container">
+                <p class="empty-cart-msg">Seu carrinho está vazio.</p>
+            </div>
+
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotalValue">R$ 0,00</span>
+                </div>
+
+                <button id="checkoutBtn" class="whatsapp-button" style="width: 100%; justify-content: center;">
+                    <i class="fab fa-whatsapp"></i> Finalizar Compra
+                </button>
+
+                <button id="clearCartBtn" class="clear-cart-btn">Limpar Carrinho</button>
             </div>
         </div>
     </div>
