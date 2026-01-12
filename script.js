@@ -274,3 +274,30 @@ searchInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') applyFilter
 
 // Início
 renderProducts(productList);
+
+/* * ==========================================
+ * CONTROLE DO MENU DE FILTROS MOBILE
+ * ==========================================
+ */
+const mobileFilterBtn = document.getElementById('mobileFilterBtn');
+const filtersSection = document.querySelector('.filters-section');
+
+if(mobileFilterBtn) {
+    mobileFilterBtn.addEventListener('click', () => {
+        // Alterna a classe que mostra/esconde a seção rosa
+        filtersSection.classList.toggle('show-filters');
+        
+        // Alterna o visual do botão (opcional, para deixá-lo rosa quando ativo)
+        mobileFilterBtn.classList.toggle('active');
+
+        // Troca o ícone: se estiver aberto vira um X, se fechado vira barras
+        const icon = mobileFilterBtn.querySelector('i');
+        if (filtersSection.classList.contains('show-filters')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+}

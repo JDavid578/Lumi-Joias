@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <header>
@@ -14,17 +16,23 @@
             <div class="logo-placeholder" id="logoHome" title="Voltar ao início">
                 <img src="media/LumiLogomaior.jpg" alt="Lumi Joias">
             </div>
-            
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Buscar joias...">
-                <button id="searchBtn"><i class="fas fa-search"></i></button>
+
+            <div class="mobile-search-wrapper">
+                <button id="mobileFilterBtn" class="mobile-filter-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar joias...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                </div>
             </div>
         </div>
     </header>
 
     <section class="filters-section">
         <div class="container filters-container">
-            
+
             <div class="custom-dropdown" id="dropdownType">
                 <div class="dropdown-label"><i class="fas fa-gem"></i> Tipo:</div>
                 <div class="dropdown-select">
@@ -51,7 +59,6 @@
                     <li data-value="todos">Todos</li>
                     <li data-value="feminino">Feminino</li>
                     <li data-value="masculino">Masculino</li>
-                    <li data-value="unissex">Unissex</li>
                 </ul>
             </div>
 
@@ -89,13 +96,15 @@
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            
+
             <div class="modal-body">
                 <div class="modal-image-area">
                     <div class="carousel-container">
-                        <button class="carousel-btn prev-btn" id="prevImgBtn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="carousel-btn prev-btn" id="prevImgBtn"><i
+                                class="fas fa-chevron-left"></i></button>
                         <img id="modalImg" src="" alt="Imagem do produto">
-                        <button class="carousel-btn next-btn" id="nextImgBtn"><i class="fas fa-chevron-right"></i></button>
+                        <button class="carousel-btn next-btn" id="nextImgBtn"><i
+                                class="fas fa-chevron-right"></i></button>
                     </div>
                     <div class="carousel-indicators" id="imageCounter">1 / 1</div>
                 </div>
@@ -104,7 +113,7 @@
                     <h2 id="modalTitle">Nome do Produto</h2>
                     <p id="modalCategory" class="modal-subtitle">Categoria | Gênero</p>
                     <p id="modalDescription">Descrição detalhada da joia.</p>
-                    
+
                     <div class="modal-meta">
                         <span class="modal-stock" id="modalStock">Estoque: 10</span>
                     </div>
@@ -123,4 +132,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

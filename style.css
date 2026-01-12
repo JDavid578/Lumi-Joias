@@ -43,10 +43,11 @@ header {
 }
 
 .logo-placeholder {
-    cursor: pointer; /* Mantém a mãozinha de clique */
+    cursor: pointer;
+    /* Mantém a mãozinha de clique */
     transition: transform 0.2s;
     /* Removemos a borda e padding antigos para ficar limpo */
-    border: none; 
+    border: none;
     padding: 0;
     display: flex;
     align-items: center;
@@ -54,14 +55,18 @@ header {
 
 /* Controla o tamanho da imagem da logo */
 .logo-placeholder img {
-    max-height: 120px; /* Altura máxima (aumente ou diminua se precisar) */
-    width: auto;      /* Mantém a proporção correta */
+    max-height: 120px;
+    /* Altura máxima (aumente ou diminua se precisar) */
+    width: auto;
+    /* Mantém a proporção correta */
     display: block;
-    border-radius: 5px; /* Opcional: arredonda levemente os cantos da imagem */
+    border-radius: 5px;
+    /* Opcional: arredonda levemente os cantos da imagem */
 }
 
 .logo-placeholder:hover {
-    transform: scale(1.05); /* Efeito de zoom suave ao passar o mouse */
+    transform: scale(1.05);
+    /* Efeito de zoom suave ao passar o mouse */
 }
 
 .search-bar {
@@ -479,94 +484,122 @@ footer {
     background-color: #1da851;
 }
 
+.mobile-search-wrapper {
+    display: flex;
+    flex-grow: 1;
+    max-width: 500px;
+    gap: 10px;
+    /* Espaço entre o botão de menu e a pesquisa */
+    align-items: center;
+}
+
+.mobile-filter-btn {
+    display: none;
+    /* Escondido por padrão no PC */
+    background-color: transparent;
+    border: 2px solid var(--color-gray);
+    /* Borda suave */
+    color: var(--color-white);
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.mobile-filter-btn:hover,
+.mobile-filter-btn.active {
+    border-color: var(--color-accent-pink);
+    color: var(--color-accent-pink);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
+    .header-content { flex-direction: column; }
+    .logo-placeholder { text-align: center; }
+    
+    /* Faz o wrapper ocupar a largura toda para alinhar botão e pesquisa */
+    .mobile-search-wrapper {
+        width: 100%;
+        max-width: 100%;
     }
 
-    .logo-placeholder {
-        text-align: center;
+    /* Mostra o botão de três tracinhos no celular */
+    .mobile-filter-btn {
+        display: block;
     }
 
+    .search-bar {
+        max-width: 100%;
+        margin-bottom: 0; /* Removemos a margem aqui pois o wrapper cuida disso */
+    }
+
+    /* --- LÓGICA DE ESCONDER/MOSTRAR FILTROS --- */
+    .filters-section {
+        /* Estado inicial: Escondido */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden; /* Impede que o conteúdo vaze quando fechado */
+        padding: 0; /* Remove o enchimento para sumir totalmente */
+        margin-bottom: 20px; /* Margem padrão */
+        
+        /* Animação suave */
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Estado quando clicado (classe adicionada pelo JS) */
+    .filters-section.show-filters {
+        max-height: 500px; /* Um valor alto o suficiente para caber tudo */
+        opacity: 1;
+        padding: 25px 0; /* Restaura o padding original */
+        margin-bottom: 40px;
+    }
+
+    /* Ajustes dos filtros para ficarem um embaixo do outro no menu */
     .filters-container {
         flex-direction: column;
         align-items: stretch;
         gap: 15px;
     }
-
+    
     .custom-dropdown {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .dropdown-select {
-        width: 100%;
-    }
+    .dropdown-select { width: 100%; }
 
+    /* Correção do menu dropdown dentro da área restrita */
     .dropdown-list {
         position: relative;
         top: 0;
         box-shadow: none;
         border: 1px solid #eee;
-        display: none;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
+        display: none; 
+        opacity: 1; visibility: visible; transform: none;
     }
 
     .custom-dropdown.active .dropdown-list {
-        display: block;
+        display: block; 
     }
 
-    .modal-body {
-        flex-direction: column;
-    }
-
-    .carousel-container {
-        height: 300px;
-    }
-
+    /* Grid de 2 colunas */
     .product-grid {
-        /* Força 2 colunas de tamanho igual */
-        grid-template-columns: repeat(2, 1fr);
-        /* Diminui o espaço entre os cards (30px é muito para celular) */
-        gap: 15px;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px; 
     }
+    .product-image-container { height: 160px; }
+    .product-info { padding: 10px; }
+    .product-title { font-size: 0.95rem; margin-bottom: 5px; }
+    .product-category { font-size: 0.7rem; }
+    .product-price { font-size: 1rem; }
+    .product-stock { font-size: 0.8rem; }
 
-    /* Ajustes para o Card caber melhor em tela pequena */
-    .product-image-container {
-        /* Reduz a altura da imagem para ficar proporcional */
-        height: 160px;
-    }
-
-    .product-info {
-        /* Reduz o espaçamento interno (padding) */
-        padding: 10px;
-    }
-
-    .product-title {
-        /* Diminui a fonte do título para não quebrar linha demais */
-        font-size: 0.95rem;
-        margin-bottom: 5px;
-    }
-
-    .product-category {
-        font-size: 0.7rem;
-    }
-
-    .product-price {
-        /* Ajusta o tamanho do preço */
-        font-size: 1rem;
-    }
-
-    .product-stock {
-        font-size: 0.8rem;
-    }
+    .modal-body { flex-direction: column; }
+    .carousel-container { height: 300px; }
 
     footer {
-        margin-top: 150px !important;
-        /* O !important obriga o navegador a aceitar */
+        margin-top: 100px !important;
         padding-bottom: 30px;
     }
 }
