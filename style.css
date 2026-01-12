@@ -1,5 +1,5 @@
 :root {
-    --color-deep-blue: #112540;
+    --color-deep-blue: #051F45;
     --color-medium-blue: #3A5880;
     --color-accent-pink: #F59BA3;
     --color-light-pink: #FCD8DC;
@@ -31,7 +31,7 @@ body {
 header {
     background-color: var(--color-deep-blue);
     color: var(--color-white);
-    padding: 20px 0;
+    padding: 3px 0;
 }
 
 .header-content {
@@ -42,20 +42,26 @@ header {
     gap: 15px;
 }
 
-/* LOGO CLICÁVEL */
 .logo-placeholder {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--color-accent-pink);
-    border: 2px dashed var(--color-gray);
-    padding: 10px 20px;
-    cursor: pointer;
+    cursor: pointer; /* Mantém a mãozinha de clique */
     transition: transform 0.2s;
+    /* Removemos a borda e padding antigos para ficar limpo */
+    border: none; 
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Controla o tamanho da imagem da logo */
+.logo-placeholder img {
+    max-height: 120px; /* Altura máxima (aumente ou diminua se precisar) */
+    width: auto;      /* Mantém a proporção correta */
+    display: block;
+    border-radius: 5px; /* Opcional: arredonda levemente os cantos da imagem */
 }
 
 .logo-placeholder:hover {
-    transform: scale(1.02);
-    border-color: var(--color-white);
+    transform: scale(1.05); /* Efeito de zoom suave ao passar o mouse */
 }
 
 .search-bar {
@@ -90,7 +96,7 @@ header {
 .filters-section {
     background-color: var(--color-light-pink);
     padding: 25px 0;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     margin-bottom: 50px;
 }
 
@@ -101,7 +107,8 @@ header {
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 10; /* Garante que os filtros fiquem sobre o conteúdo */
+    z-index: 10;
+    /* Garante que os filtros fiquem sobre o conteúdo */
 }
 
 /* O Container Principal do Dropdown */
@@ -129,14 +136,14 @@ header {
     align-items: center;
     justify-content: space-between;
     min-width: 160px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     border: 2px solid transparent;
     transition: all 0.3s;
 }
 
 /* Efeito ao passar o mouse no botão */
 .dropdown-select:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-color: rgba(245, 155, 163, 0.5);
 }
 
@@ -149,14 +156,14 @@ header {
 /* A Lista de Opções (Escondida inicialmente) */
 .dropdown-list {
     position: absolute;
-    top: calc(100% + 10px); 
+    top: calc(100% + 10px);
     left: 0;
-    width: 100%; 
+    width: 100%;
     min-width: 180px;
     background-color: var(--color-white);
-    border-radius: 15px; 
+    border-radius: 15px;
     padding: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     list-style: none;
     opacity: 0;
     visibility: hidden;
@@ -173,7 +180,8 @@ header {
 }
 
 .custom-dropdown.active .arrow {
-    transform: rotate(180deg); /* Gira a setinha */
+    transform: rotate(180deg);
+    /* Gira a setinha */
 }
 
 /* Itens individuais da lista */
@@ -190,7 +198,8 @@ header {
 .dropdown-list li:hover {
     background-color: var(--color-light-pink);
     color: var(--color-deep-blue);
-    padding-left: 20px; /* Pequeno movimento para a direita */
+    padding-left: 20px;
+    /* Pequeno movimento para a direita */
 }
 
 /* --- GRADE DE PRODUTOS --- */
@@ -211,7 +220,7 @@ main {
     background-color: var(--color-white);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     border: 1px solid #eee;
     cursor: pointer;
@@ -221,7 +230,7 @@ main {
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
     border-color: var(--color-light-pink);
 }
 
@@ -320,13 +329,20 @@ footer {
     width: 100%;
     max-width: 1000px;
     position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     animation: modalFadeIn 0.3s;
 }
 
 @keyframes modalFadeIn {
-    from {opacity: 0; transform: translateY(-20px);}
-    to {opacity: 1; transform: translateY(0);}
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .close-modal {
@@ -399,8 +415,13 @@ footer {
     background-color: rgba(245, 155, 163, 0.9);
 }
 
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
 
 .carousel-indicators {
     margin-top: 10px;
@@ -460,15 +481,20 @@ footer {
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .header-content { flex-direction: column; }
-    .logo-placeholder { text-align: center; }
-    
+    .header-content {
+        flex-direction: column;
+    }
+
+    .logo-placeholder {
+        text-align: center;
+    }
+
     .filters-container {
         flex-direction: column;
         align-items: stretch;
         gap: 15px;
     }
-    
+
     .custom-dropdown {
         flex-direction: column;
         align-items: stretch;
@@ -483,20 +509,64 @@ footer {
         top: 0;
         box-shadow: none;
         border: 1px solid #eee;
-        display: none; 
-        opacity: 1; visibility: visible; transform: none;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
     }
 
     .custom-dropdown.active .dropdown-list {
-        display: block; 
+        display: block;
     }
 
-    .modal-body { flex-direction: column; }
-    .carousel-container { height: 300px; }
+    .modal-body {
+        flex-direction: column;
+    }
 
+    .carousel-container {
+        height: 300px;
+    }
+
+    .product-grid {
+        /* Força 2 colunas de tamanho igual */
+        grid-template-columns: repeat(2, 1fr);
+        /* Diminui o espaço entre os cards (30px é muito para celular) */
+        gap: 15px;
+    }
+
+    /* Ajustes para o Card caber melhor em tela pequena */
+    .product-image-container {
+        /* Reduz a altura da imagem para ficar proporcional */
+        height: 160px;
+    }
+
+    .product-info {
+        /* Reduz o espaçamento interno (padding) */
+        padding: 10px;
+    }
+
+    .product-title {
+        /* Diminui a fonte do título para não quebrar linha demais */
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+    }
+
+    .product-category {
+        font-size: 0.7rem;
+    }
+
+    .product-price {
+        /* Ajusta o tamanho do preço */
+        font-size: 1rem;
+    }
+
+    .product-stock {
+        font-size: 0.8rem;
+    }
 
     footer {
-        margin-top: 150px !important; /* O !important obriga o navegador a aceitar */
+        margin-top: 150px !important;
+        /* O !important obriga o navegador a aceitar */
         padding-bottom: 30px;
     }
 }

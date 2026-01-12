@@ -10,7 +10,7 @@ const productList = [
         id: 1,
         name: "Anel Solitário Safira",
         price: 1250.90,
-        stock: 5,
+        stock: 17,
         images: [
             "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&auto=format&fit=crop&q=60", 
             "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=500&auto=format&fit=crop&q=60"
@@ -23,7 +23,7 @@ const productList = [
         id: 2,
         name: "Colar Delicado Coração",
         price: 180.50,
-        stock: 12,
+        stock: 17,
         images: [
             "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&auto=format&fit=crop&q=60"
         ],
@@ -33,22 +33,22 @@ const productList = [
     },
     {
         id: 3,
-        name: "Pulseira Masculina Couro",
+        name: "Anel de ouro cravejado",
         price: 95.00,
-        stock: 20,
+        stock: 22,
         images: [
             "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&auto=format&fit=crop&q=60",
             "https://images.unsplash.com/photo-1611591437238-b773328d022b?w=500&auto=format&fit=crop&q=60"
         ],
-        category: "pulseira",
+        category: "anel",
         gender: "masculino",
-        description: "Pulseira moderna combinando couro trançado preto e detalhes em aço inoxidável."
+        description: "um lindo anel dourado de ouro muito bonito e cravejado com pedras brilhantes."
     },
     {
         id: 4,
         name: "Brincos de Pérola",
         price: 250.00,
-        stock: 8,
+        stock: 22,
         images: [
             "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&auto=format&fit=crop&q=60"
         ],
