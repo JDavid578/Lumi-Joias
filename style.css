@@ -522,6 +522,7 @@ footer {
     .mobile-search-wrapper {
         width: 100%;
         max-width: 100%;
+        margin-bottom: 15px;
     }
 
     /* Mostra o botão de três tracinhos no celular */
