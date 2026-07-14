@@ -1,3 +1,18 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyC94POEdHdl7gbgL_-xQtRiYJd5rYAZpck",
+    authDomain: "lumi-joias-2bd00.firebaseapp.com",
+    projectId: "lumi-joias-2bd00",
+    storageBucket: "lumi-joias-2bd00.firebasestorage.app",
+    messagingSenderId: "637641508263",
+    appId: "1:637641508263:web:4fe3aefcf37a2274c5a282"
+  };
+
+
+
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 /*
  * ===================================================================================================
  * BANCO DE DADOS DE PRODUTOS
