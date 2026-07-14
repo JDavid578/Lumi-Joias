@@ -7,61 +7,38 @@ const firebaseConfig = {
     appId: "1:637641508263:web:4fe3aefcf37a2274c5a282"
   };
 
-
-
-
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 /*
  * ===================================================================================================
- * BANCO DE DADOS DE PRODUTOS
+ * BANCO DE DADOS DE PRODUTOS em tempo real com firebase firestore. (é uma opção para quem quer atualizar os produtos sem precisar mexer no código)
  * ===================================================================================================
  */
 
-const productList = [
-    {
-        id: 1,
-        name: "Anel Cristais Coloridos Prata",
-        price: 55.90,
-        stock: 1,
-        images: [
-            "media\\Itens\\07.2026\\AnelCristaisColor.jpg",
-            "media\\Itens\\07.2026\\AnelCristaisColorMao.jpg"
-        ],
-        category: "anel",
-        gender: "feminino",
-        description: "Anel Regulável, cravejado com zirconias coloridas."
-    },
-    {
-        id: 2,
-        name: "Anel Florzinha Prata",
-        price: 59.90,
-        stock: 1,
-        images: [
-            "media\\Itens\\07.2026\\AnelFlorzinha.jpg",
-            "media\\Itens\\07.2026\\AnelFlorzinhaMao.jpg"
-        ],
-        category: "anel",
-        gender: "feminino",
-        description: "Anel Regulável, cravejado com zirconias brancas, em formato de florzinha."
-    },
-    {
-        id: 3,
-        name: "Anel Sol e Lua Prata",
-        price: 54.90,
-        stock: 1,
-        images: [
-            "media\\Itens\\07.2026\\AnelSolELua.jpg",
-            "media\\Itens\\07.2026\\AnelSolELuaMao.jpg"
-        ],
-        category: "anel",
-        gender: "feminino",
-        description: "Anel Regulável, em formato de sol e lua."
-    }
-    
-    // Adicionar mais produtos aqui...
-];
+// Banco de dados em tempo real (inicializado vazio)
+let productList = [];
+
+// Escuta as alterações no Firestore em tempo real
+function ouvirBancoDeDados() {
+    db.collection("produtos").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
+        productList = []; // Limpa a lista local antes de atualizar
+        
+        snapshot.forEach((doc) => {
+            let produto = doc.data();
+            produto.id = doc.id; // Vincula o ID único do Firestore
+            productList.push(produto);
+        });
+
+        // Dispara a renderização e o preload das imagens de forma automática!
+        renderProducts(productList);
+        if (typeof precarregarImagens === "function") {
+            precarregarImagens(productList);
+        }
+    }, (error) => {
+        console.error("Erro ao ler banco de dados:", error);
+    });
+}
 
 /**
  * ==========================================
@@ -398,8 +375,6 @@ checkoutBtn.addEventListener('click', () => {
     window.open(whatsappUrl, '_blank');
 });
 
-// Inicialização
-renderProducts(productList);
 /*
  * ==========================================
  * Sistema de zoom nas imagens do modal
@@ -479,3 +454,7 @@ function resetZoom() {
     img.classList.remove('zoomed');
     img.style.transformOrigin = 'center center';
 }
+
+
+// Inicia a escuta em tempo real com o Firestore
+ouvirBancoDeDados();
