@@ -7,41 +7,42 @@
 const productList = [
     {
         id: 1,
-        name: "Anel Solitário Safira",
-        price: 1250.90,
-        stock: 17,
+        name: "Anel Cristais Coloridos Prata",
+        price: 55.90,
+        stock: 1,
         images: [
-            "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&auto=format&fit=crop&q=60", 
-            "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=500&auto=format&fit=crop&q=60"
+            "media\\Itens\\07.2026\\AnelCristaisColor.jpg",
+            "media\\Itens\\07.2026\\AnelCristaisColorMao.jpg"
         ],
         category: "anel",
         gender: "feminino",
-        description: "Anel solitário clássico com uma pedra central de safira azul e acabamento em prata esterlina 925."
+        description: "Anel Regulável, cravejado com zirconias coloridas."
     },
     {
         id: 2,
-        name: "Colar Delicado Coração",
-        price: 180.50,
-        stock: 17,
+        name: "Anel Florzinha Prata",
+        price: 59.90,
+        stock: 1,
         images: [
-            "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&auto=format&fit=crop&q=60"
+            "media\\Itens\\07.2026\\AnelFlorzinha.jpg",
+            "media\\Itens\\07.2026\\AnelFlorzinhaMao.jpg"
         ],
-        category: "colar",
+        category: "anel",
         gender: "feminino",
-        description: "Colar com pingente de coração minimalista, banhado a ouro rosé."
+        description: "Anel Regulável, cravejado com zirconias brancas, em formato de florzinha."
     },
     {
         id: 3,
-        name: "Anel de ouro cravejado",
-        price: 95.00,
-        stock: 22,
+        name: "Anel Sol e Lua Prata",
+        price: 54.90,
+        stock: 1,
         images: [
-            "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&auto=format&fit=crop&q=60",
-            "https://images.unsplash.com/photo-1611591437238-b773328d022b?w=500&auto=format&fit=crop&q=60"
+            "media\\Itens\\07.2026\\AnelSolELua.jpg",
+            "media\\Itens\\07.2026\\AnelSolELuaMao.jpg"
         ],
         category: "anel",
-        gender: "masculino",
-        description: "Um lindo anel dourado de ouro muito bonito e cravejado com pedras brilhantes."
+        gender: "feminino",
+        description: "Anel Regulável, em formato de sol e lua."
     },
     {
         id: 4,
