@@ -43,20 +43,9 @@ const productList = [
         category: "anel",
         gender: "feminino",
         description: "Anel Regulável, em formato de sol e lua."
-    },
-    {
-        id: 4,
-        name: "Brincos de Pérola",
-        price: 250.00,
-        stock: 22,
-        images: [
-            "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&auto=format&fit=crop&q=60"
-        ],
-        category: "brinco",
-        gender: "feminino",
-        description: "Par de brincos clássicos com pérolas de água doce e fecho de ouro branco."
     }
-    // Adicione mais produtos aqui...
+    
+    // Adicionar mais produtos aqui...
 ];
 
 /**
