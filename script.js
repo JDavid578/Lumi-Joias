@@ -385,3 +385,82 @@ checkoutBtn.addEventListener('click', () => {
 
 // Inicialização
 renderProducts(productList);
+/*
+ * ==========================================
+ * Sistema de zoom nas imagens do modal
+ * ==========================================
+ */
+
+const container = document.querySelector('.carousel-container');
+const img = document.querySelector('.carousel-container img');
+
+// Controle do estado do zoom
+let isZoomed = false;
+
+// 1. Evento de clique / toque rápido (Funciona no PC e celular para ligar/desligar)
+container.addEventListener('click', (e) => {
+    isZoomed = !isZoomed; 
+
+    if (isZoomed) {
+        img.classList.add('zoomed');
+        moveZoom(e); // Aplica o zoom inicial onde clicou
+    } else {
+        resetZoom();
+    }
+});
+
+// 2. --- LÓGICA PARA PC (Mouse) ---
+function moveZoom(e) {
+    if (!isZoomed) return;
+
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
+    
+    img.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+}
+
+container.addEventListener('mousemove', moveZoom);
+
+// No PC, se o mouse sair da imagem, desativa o zoom por segurança
+container.addEventListener('mouseleave', () => {
+    resetZoom();
+});
+
+
+// 3. --- LÓGICA PARA CELULAR (Touch / Arrastar com o dedo) ---
+function moveZoomTouch(e) {
+    if (!isZoomed) return;
+
+    // Impede o celular de rolar a página para cima/baixo enquanto o usuário arrasta o dedo na imagem
+    e.preventDefault();
+
+    const rect = container.getBoundingClientRect();
+    const touch = e.touches[0]; // Pega o primeiro ponto de toque do dedo
+    
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    
+    // Limita as coordenadas para não dar erro caso o dedo saia um pouco da área da imagem
+    const xClamped = Math.max(0, Math.min(x, rect.width));
+    const yClamped = Math.max(0, Math.min(y, rect.height));
+    
+    const xPercent = (xClamped / rect.width) * 100;
+    const yPercent = (yClamped / rect.height) * 100;
+    
+    img.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+}
+
+// O parâmetro { passive: false } é obrigatório para permitir que o 'e.preventDefault()' funcione e bloqueie o scroll
+container.addEventListener('touchmove', moveZoomTouch, { passive: false });
+
+
+// 4. --- FUNÇÃO DE RESET ---
+function resetZoom() {
+    isZoomed = false;
+    img.classList.remove('zoomed');
+    img.style.transformOrigin = 'center center';
+}
