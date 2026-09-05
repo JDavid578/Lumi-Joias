@@ -966,3 +966,58 @@ footer {
         padding: 20px 15px; /* Reduz o padding interno para sobrar mais tela */
     }
 }
+
+/* ==========================================
+   BOTÕES FLUTUANTES INSTA E CARRINHO
+   ========================================== */
+
+/* --- VERSÃO PC (DESKTOP) --- */
+.floating-cart {
+    bottom: 95px !important; 
+    right: 25px !important;  
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.floating-insta {
+    position: fixed;
+    bottom: 20px;
+    right: 25px; 
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.floating-insta:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+    color: white;
+}
+
+/* --- VERSÃO CELULAR --- */
+@media (max-width: 768px) {
+    .floating-cart {
+        bottom: 85px !important; 
+        right: 20px !important;
+        width: 55px !important; 
+        height: 55px !important;
+    }
+    
+    .floating-insta {
+        bottom: 15px;
+        right: 20px; 
+        width: 55px; 
+        height: 55px;
+        font-size: 30px; 
+    }
+}
